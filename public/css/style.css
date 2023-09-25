@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --poppins: "Poppins", sans-serif;
+    --ungu: #b1b2ff;
+    --biru: #aac4ff;
+    --abu: #d2daff;
+    --putih: #eef1ff;
+    --hijau: #b3ffae;
+    --merah: #fc7d7d;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: var(--poppins);
+}
+
+/* HALAMAN UTAMA */
+#header {
+    width: 100%;
+    height: 50px;
+    background-color: var(--ungu);
+    border-bottom: 2px solid var(--putih);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.judul {
+    width: 460px;
+    height: 70px;
+    background-color: var(--biru);
+    border-radius: 25px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.judul > h2 {
+    color: white;
+    font-weight: 600;
+    line-height: 70px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.konten {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.konten-kotak:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+.konten-kotak {
+    position: relative;
+    width: 250px;
+    height: 210px;
+    overflow: hidden;
+    border: 1px solid var(--abu);
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+}
+
+.thumb {
+    height: 210px;
+    position: relative;
+}
+
+a > div.konten-judul {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    height: 70px;
+    background-color: var(--ungu);
+    padding: 10px;
+}
+
+a > div.konten-judul {
+    font-size: 18px;
+    font-weight: 600;
+}
+/* AKHIR HALAMAN UTAMA */
+
+/* HALAMAN LOGIN */
+#login {
+    width: 100%;
+    height: 100vh;
+}
+
+.kotak-login {
+    width: 300px;
+    height: 380px;
+    border-radius: 10px;
+    background-color: var(--biru);
+    box-shadow: 3px 3px 5px #4267b2;
+    padding: 15px;
+}
+
+.kotak-login > h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-align: left;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.teks-login {
+    color: white;
+    letter-spacing: 0.14em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+input,
+.btn-login {
+    box-shadow: 2px 2px 4px #4267b2;
+}
+
+.btn-login {
+    color: black;
+    background-color: var(--ungu);
+    letter-spacing: 0.14em;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+}
+
+.btn-login:hover {
+    background-color: #9193fe;
+}
+
+.btn-login:active {
+    background-color: #9193fe;
+}
+
+a.kembali {
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+/* AKHIR HALAMAN LOGIN */
