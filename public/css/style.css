@@ -91,6 +91,12 @@ a > div.konten-judul {
 /* AKHIR HALAMAN UTAMA */
 
 /* HALAMAN LOGIN */
+.peringatan {
+    width: 350px;
+    position: absolute;
+    top: 5em;
+}
+
 #login {
     width: 100%;
     height: 100vh;

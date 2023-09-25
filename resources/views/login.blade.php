@@ -14,6 +14,42 @@
     <link rel="stylesheet" href="../../css/style.css">
   </head>
   <body>
+    {{-- ALERT --}}
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+
+            @if (session()->has('notregister'))
+                <div class="peringatan">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        User Belum Aktif
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
+
+            @if (session()->has('gagal'))
+                <div class="peringatan">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Username / Password Salah
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
+
+            @if (session()->has('keluar'))
+                <div class="peringatan">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Anda telah Berhasil Logout
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
+
+        </div>
+    </div>
+    {{-- AKHIR ALERT --}}
+
+    {{-- MENU LOGIN --}}
     <section id="login" class="d-flex justify-content-center align-items-center">
         <div class="row">
             <div class="col">
@@ -42,6 +78,7 @@
             </div>
         </div>
     </section>
+    {{-- AKHIR MENU LOGIN --}}
 
     
     {{-- JS Bootstrap 5 --}}
