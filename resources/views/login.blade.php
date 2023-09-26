@@ -61,11 +61,11 @@
                         @csrf
                         <div class="mb-3">
                             <label for="username" class="form-label teks-login">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Your Username">
+                            <input type="text" class="form-control input-login @error('username') is-invalid @enderror" id="username" name="username" placeholder="Your Username" autofocus required>
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label teks-login">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Your Password">
+                            <input type="password" class="form-control input-login @error('password') is-invalid @enderror" id="password" name="password" placeholder="Your Password" required>
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-login">Login</button>

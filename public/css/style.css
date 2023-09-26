@@ -125,7 +125,7 @@ a > div.konten-judul {
     letter-spacing: 0.14em;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
-input,
+.input-login,
 .btn-login {
     box-shadow: 2px 2px 4px #4267b2;
 }
@@ -154,3 +154,85 @@ a.kembali {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 /* AKHIR HALAMAN LOGIN */
+
+/* HALAMAN DASHBOARD */
+.judul-dash {
+    width: 250px;
+    height: 50px;
+    margin-left: 3em;
+    background-color: var(--biru);
+    border-radius: 25px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.judul-dash > h4 {
+    color: white;
+    font-weight: 400;
+    line-height: 50px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.konten {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.konten-kotak:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+.konten-kotak {
+    position: relative;
+    margin: 1em 1em;
+    width: 250px;
+    height: 210px;
+    overflow: hidden;
+    border: 1px solid var(--abu);
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+}
+
+.thumb {
+    height: 210px;
+    position: relative;
+}
+
+div.dash-judul {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    height: 70px;
+    background-color: var(--ungu);
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+}
+
+div.dash-judul > a,
+div.dash-judul > button {
+    width: 50%;
+    text-align: center;
+}
+div.dash-judul > a {
+    display: flex;
+    align-content: center;
+    background-color: var(--hijau);
+}
+div.dash-judul > a:hover {
+    background-color: #61ff7e;
+}
+
+div.dash-judul > button {
+    background-color: var(--merah);
+}
+div.dash-judul > button:hover {
+    background-color: rgb(255, 56, 56);
+}
+
+/* AKHIR HALAMAN DASHBOARD */

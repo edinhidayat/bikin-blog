@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// HALAMAN UTAMA
 Route::get('/',[HomeController::class,'index'])->name('home');
-Route::get('/login',[LoginController::class,'index'])->name('login');
+
+// MIDDLEWARE GUEST
+Route::get('/login',[LoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('/login',[LoginController::class,'login']);
 Route::get('/logout',[LoginController::class,'logout']);
+
+// MIDDLEWARE AUTH
+Route::get('check_slug', function () {
+    $slug = SlugService::createSlug(App\Models\Post::class, 'slug', request('judul'));
+    return response()->json(['slug' => $slug]);
+});
+Route::resource('/dashboard', DashboardController::class)->middleware('auth');
