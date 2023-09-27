@@ -19,6 +19,7 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 
 // HALAMAN UTAMA
 Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/a/{id}',[HomeController::class,'tampil']);
 
 // MIDDLEWARE GUEST
 Route::get('/login',[LoginController::class,'index'])->name('login')->middleware('guest');

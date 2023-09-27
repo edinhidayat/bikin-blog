@@ -51,6 +51,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
+                @if (session()->has('suksesubah'))
+                    <div class="alert alert-warning alert-dismissible fade show d-inline-block" role="alert">
+                        Data berhasil diubah!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
 
             </div>
         </div>
@@ -66,10 +72,10 @@
                     <div class="konten-kotak mb-3">
                         <img src="{{ asset('storage/' . substr($item->thumb, 6)) }}" class="thumb" alt="Gambar Thumbnail">
                         <div class="dash-judul">
-                            <a class="d-block text-decoration-none d-flex justify-content-center align-items-center" href="#">
+                            <button type="button" class="btn d-block rounded-0 edit-button" data-bs-toggle="modal" data-bs-target="#ubah{{ $item->id }}">
                                 <span class="fs-2 text-dark"><i class="bi bi-pencil-fill"></i></span>
-                            </a>
-                            <button type="button" class="btn d-block rounded-0" data-bs-toggle="modal" data-bs-target="#hps">
+                            </button>
+                            <button type="button" class="btn d-block rounded-0 delete-button" data-bs-toggle="modal" data-bs-target="#hps{{ $item->id }}">
                                 <span class="fs-2"><i class="bi bi-trash"></i></span>
                             </button>
                         </div>
@@ -142,7 +148,7 @@
     </div>
 
     <!-- Modal HAPUS -->
-    <div class="modal fade" id="hps" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="hps{{ $item->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -221,6 +227,34 @@
                 }else{
                     imgPreview2.src = oFREvent.target.result;
                 }
+            }
+        }
+
+        function previewTiga(){
+            const gambar = document.querySelector('.thumb1');
+            const imgPreview3 = document.querySelector('.img-preview3');
+        
+            imgPreview3.style.display = 'block';
+        
+            const oFReader =  new FileReader();
+            oFReader.readAsDataURL(gambar.files[0]);
+        
+            oFReader.onload = function(oFREvent) {
+                imgPreview3.src = oFREvent.target.result;
+            }
+        }
+
+        function previewEmpat(){
+            const gbr = document.querySelector('.banner1');
+            const imgPreview4 = document.querySelector('.img-preview4');
+        
+            imgPreview4.style.display = 'block';
+        
+            const oFReader =  new FileReader();
+            oFReader.readAsDataURL(gbr.files[0]);
+        
+            oFReader.onload = function(oFREvent) {
+                imgPreview4.src = oFREvent.target.result;
             }
         }
     </script>

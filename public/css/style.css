@@ -90,6 +90,48 @@ a > div.konten-judul {
 }
 /* AKHIR HALAMAN UTAMA */
 
+/* HALAMAN TAMPIL */
+.banner {
+    width: 100%;
+    height: 20em;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.banner-gb {
+    width: 100%;
+    display: block;
+}
+
+.tampil-judul {
+    font-weight: 600;
+}
+
+.tampil-other {
+    font-weight: 500;
+    letter-spacing: 0.2em;
+}
+
+.post-other {
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.thumbnail {
+    width: 100%;
+    height: 6em;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumbnail > img {
+    width: 130% !important;
+    display: block;
+}
+/* AKHIR HALAMAN TAMPIL */
+
 /* HALAMAN LOGIN */
 .peringatan {
     width: 350px;
@@ -214,24 +256,21 @@ div.dash-judul {
     display: flex;
 }
 
-div.dash-judul > a,
 div.dash-judul > button {
     width: 50%;
     text-align: center;
 }
-div.dash-judul > a {
-    display: flex;
-    align-content: center;
+div.dash-judul > button.edit-button {
     background-color: var(--hijau);
 }
-div.dash-judul > a:hover {
+div.dash-judul > button.edit-button:hover {
     background-color: #61ff7e;
 }
 
-div.dash-judul > button {
+div.dash-judul > button.delete-button {
     background-color: var(--merah);
 }
-div.dash-judul > button:hover {
+div.dash-judul > button.delete-button:hover {
     background-color: rgb(255, 56, 56);
 }
 

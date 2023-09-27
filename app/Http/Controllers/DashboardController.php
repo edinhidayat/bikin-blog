@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -89,7 +90,38 @@ class DashboardController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $rules = [
+            'user_id' => 'required',
+            'judul' => 'required|max:200',
+            'body' => 'required',
+            'thumb' => 'image|file|max:2048',
+            'banner' => 'image|file|max:2048'
+        ];
+
+        if($post->slug != $request->slug){
+            $rules = ['slug' => 'required|unique:posts,slug'];
+        }
+        $rules = ['slug' => 'required'];
+
+        $validated = $request->validate($rules);
+
+        if ($request->file('thumb')) {
+            if ($request->oldThumb) {
+                Storage::delete($request->oldThumb);
+            }
+            $validated['thumb'] = $request->file('thumb')->store('public/thumb');
+        }
+
+        if ($request->file('banner')) {
+            if ($request->oldBanner) {
+                Storage::delete($request->oldBanner);
+            }
+            $validated['banner'] = $request->file('banner')->store('public/banner');
+        }
+
+        Post::where('id', $post->id)
+                ->update($validated);
+        return redirect('/dashboard')->with('suksesubah', 'Data Berhasil diubah!');
     }
 
     /**
