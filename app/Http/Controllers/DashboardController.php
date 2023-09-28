@@ -76,9 +76,12 @@ class DashboardController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($post)
     {
-        //
+        return view('ubah',[
+            'title' => 'Ubah Blog',
+            'post' => Post::find($post)->get()
+        ]);
     }
 
     /**
@@ -88,8 +91,10 @@ class DashboardController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $post)
     {
+        $post = Post::find($post);
+        
         $rules = [
             'user_id' => 'required',
             'judul' => 'required|max:200',
@@ -99,9 +104,9 @@ class DashboardController extends Controller
         ];
 
         if($post->slug != $request->slug){
-            $rules = ['slug' => 'required|unique:posts,slug'];
+            $rules['slug'] = 'required|unique:posts,slug';
         }
-        $rules = ['slug' => 'required'];
+        $rules['slug'] = 'required';
 
         $validated = $request->validate($rules);
 
@@ -130,8 +135,16 @@ class DashboardController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($post)
     {
-        //
+        $post = Post::find($post);
+        if ($post->thumb) {
+            Storage::delete($post->thumb);
+        }
+        if ($post->banner) {
+            Storage::delete($post->banner);
+        }
+        Post::destroy($post->id);
+        return redirect('/dashboard')->with('sukseshapus', 'Data Berhasil dihapus!');
     }
 }

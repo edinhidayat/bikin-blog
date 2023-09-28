@@ -15,11 +15,11 @@ class HomeController extends Controller
         ]);
     }
 
-    public function tampil($id)
+    public function tampil($slug)
     {
         return view('tampil',[
             'title' => 'Blog',
-            'post' => Post::where('slug',$id)->get(),
+            'post' => Post::where('slug',$slug)->get(),
             'posts' => Post::latest()->get()
         ]);
     }

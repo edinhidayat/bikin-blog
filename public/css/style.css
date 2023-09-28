@@ -96,12 +96,14 @@ a > div.konten-judul {
     height: 20em;
     overflow: hidden;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
 .banner-gb {
-    width: 100%;
     display: block;
+    width: 100%;
+    transform: scale(1.1);
 }
 
 .tampil-judul {
@@ -272,6 +274,53 @@ div.dash-judul > button.delete-button {
 }
 div.dash-judul > button.delete-button:hover {
     background-color: rgb(255, 56, 56);
+}
+
+/* UBAH */
+.form-ubah {
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+}
+
+.tombolx {
+    position: absolute;
+    z-index: 999;
+    top: 15px;
+    right: 1em;
+    color: white;
+    font-size: 2rem;
+}
+
+.tombolx:hover {
+    cursor: pointer;
+}
+
+.pembungkus-form {
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.form-edit {
+    border-radius: 7px;
+    box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+    width: 70%;
+    background-color: whitesmoke;
+    padding: 1em;
+}
+
+.tombol-gambar:hover {
+    cursor: pointer;
 }
 
 /* AKHIR HALAMAN DASHBOARD */

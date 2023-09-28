@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-    {{-- HEADER dan JUDUL --}}
+    <div id="ubah"></div>
+    {{-- HEADER --}}
     <section id="utama">
         <div class="row">
             <div class="col">
@@ -37,6 +38,7 @@
             </div>
         </div>
 
+        {{-- TOMBOL CREATE BLOG --}}
         <div class="row">
             <div class="col-md">
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#buat">
@@ -57,6 +59,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
+                @if (session()->has('sukseshapus'))
+                    <div class="alert alert-danger alert-dismissible fade show d-inline-block" role="alert">
+                        Data sudah berhasil dihapus!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
 
             </div>
         </div>
@@ -70,9 +78,11 @@
                 @foreach ($posts as $item)
 
                     <div class="konten-kotak mb-3">
-                        <img src="{{ asset('storage/' . substr($item->thumb, 6)) }}" class="thumb" alt="Gambar Thumbnail">
+                        <a href="/a/{{ $item->slug }}">
+                            <img src="{{ asset('storage/' . substr($item->thumb, 6)) }}" class="thumb" alt="Gambar Thumbnail">
+                        </a>
                         <div class="dash-judul">
-                            <button type="button" class="btn d-block rounded-0 edit-button" data-bs-toggle="modal" data-bs-target="#ubah{{ $item->id }}">
+                            <button type="button" onclick="ubah({{ $item->id }})" class="btn d-block rounded-0 edit-button" id="button-ubah">
                                 <span class="fs-2 text-dark"><i class="bi bi-pencil-fill"></i></span>
                             </button>
                             <button type="button" class="btn d-block rounded-0 delete-button" data-bs-toggle="modal" data-bs-target="#hps{{ $item->id }}">
@@ -113,17 +123,21 @@
                         <input type="text" class="form-control form-control-lg input-post @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}" placeholder="Slug" readonly>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-md-4">
                             <div class="input-group input-post mb-2">
-                                <input type="file" class="d-inline-block form-control" id="thumb" name="thumb" onchange="previewImage(thumb)" required>
-                                <label class="input-group-text" for="thumb">Upload Thumbnail</label>
+                                <div class="d-none">
+                                    <input type="file" class="d-inline-block form-control" id="thumb" name="thumb" onchange="previewImage(thumb)" required>
+                                </div>
+                                <label class="input-group-text tombol-gambar" for="thumb"><i class="bi bi-upload"></i>&nbsp; Upload Thumbnail</label>
                             </div>
                             <img class="img-preview1 img-fluid mb-4">
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-4">
                             <div class="input-group input-post mb-2">
-                                <input type="file" class="d-inline-block form-control" id="banner" name="banner" onchange="previewImage(banner)" required>
-                                <label class="input-group-text" for="banner">Upload Banner</label>
+                                <div class="d-none">
+                                    <input type="file" class="d-inline-block form-control" id="banner" name="banner" onchange="previewImage(banner)" required>
+                                </div>
+                                <label class="input-group-text tombol-gambar" for="banner"><i class="bi bi-upload"></i>&nbsp; Upload Banner</label>
                             </div>
                             <img class="img-preview2 img-fluid mb-4">
                         </div>
@@ -148,23 +162,29 @@
     </div>
 
     <!-- Modal HAPUS -->
-    <div class="modal fade" id="hps{{ $item->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+    @foreach ($posts as $item)
+        <div class="modal fade" id="hps{{ $item->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Apakah Anda yakin mau Hapus blog : {{ $item->judul }} ???
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form action="/dashboard/{{ $item->id }}" method="post">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i>&nbsp; Delete</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
-    </div>
+    @endforeach
 
     <!-- Modal LOGOUT -->
     <div class="modal fade" id="logout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -188,11 +208,11 @@
         </div>
     </div>
         
-
     {{-- JS Bootstrap 5 --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     {{-- JQuery --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../../js/script.js"></script>
     {{-- Check Slug --}}
     <script>
         $('#judul').change(function(e) {
@@ -206,56 +226,29 @@
     </script>
     {{-- Script TrixEditor --}}
     <script>
-        document.addEventListener('trix-file-accept', function(e) {
+        document.addEventListener("trix-file-accept", function (e) {
             e.preventDefault;
-        })
-    
-        function previewImage(gambar){
-            console.log(gambar)
-            const imgPreview1 = document.querySelector('.img-preview1');
-            const imgPreview2 = document.querySelector('.img-preview2');
-        
-            imgPreview1.style.display = 'block';
-            imgPreview2.style.display = 'block';
-        
-            const oFReader =  new FileReader();
+        });
+
+        // Preview IMAGE
+        function previewImage(gambar) {
+            console.log(gambar==thumb);
+            const imgPreview1 = document.querySelector(".img-preview1");
+            const imgPreview2 = document.querySelector(".img-preview2");
+
+            imgPreview1.style.display = "block";
+            imgPreview2.style.display = "block";
+
+            const oFReader = new FileReader();
             oFReader.readAsDataURL(gambar.files[0]);
-        
-            oFReader.onload = function(oFREvent) {
-                if(gambar == thumb){
+
+            oFReader.onload = function (oFREvent) {
+                if (gambar == thumb) {
                     imgPreview1.src = oFREvent.target.result;
-                }else{
+                } else {
                     imgPreview2.src = oFREvent.target.result;
                 }
-            }
-        }
-
-        function previewTiga(){
-            const gambar = document.querySelector('.thumb1');
-            const imgPreview3 = document.querySelector('.img-preview3');
-        
-            imgPreview3.style.display = 'block';
-        
-            const oFReader =  new FileReader();
-            oFReader.readAsDataURL(gambar.files[0]);
-        
-            oFReader.onload = function(oFREvent) {
-                imgPreview3.src = oFREvent.target.result;
-            }
-        }
-
-        function previewEmpat(){
-            const gbr = document.querySelector('.banner1');
-            const imgPreview4 = document.querySelector('.img-preview4');
-        
-            imgPreview4.style.display = 'block';
-        
-            const oFReader =  new FileReader();
-            oFReader.readAsDataURL(gbr.files[0]);
-        
-            oFReader.onload = function(oFREvent) {
-                imgPreview4.src = oFREvent.target.result;
-            }
+            };
         }
     </script>
 </body>

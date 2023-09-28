@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md">
         <div class="banner">
-            <img src="{{ asset('storage/' . substr($post[0]->banner, 7)) }}" alt="Gambar Banner" class="img-fluid banner-gb">
+            <img src="{{ asset('storage/' . substr($post[0]->banner, 7)) }}" alt="Gambar Banner" class="img-fluid d-block banner-gb">
         </div>
     </div>
 </div>
