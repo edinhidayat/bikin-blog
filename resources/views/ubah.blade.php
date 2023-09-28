@@ -11,9 +11,9 @@
     <div class="row">
         <div class="col">
             <div class="form-ubah">
-                <div class="tombolx" onclick="tutup()"><i class="bi bi-x-circle"></i></div>
 
                 <div class="pembungkus-form">
+                    <div class="tombolx" onclick="tutup()"><i class="bi bi-x-circle"></i></div>
                     <div class="form-edit">
                         <form action="/dashboard/{{ $post[0]->id }}" method="post" enctype="multipart/form-data">
                             @method('put')

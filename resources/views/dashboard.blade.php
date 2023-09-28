@@ -29,6 +29,11 @@
         <div class="row">
             <div class="col">
                 <div id="header">
+                    <div class="me-3">
+                        <a href="/" class="btn btn-sm btn-secondary">
+                            Home &nbsp;<i class="bi bi-house-door-fill"></i>
+                        </a>
+                    </div>
                     <div class="me-5">
                         <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#logout">
                             Logout &nbsp;<i class="bi bi-box-arrow-right"></i>
@@ -174,12 +179,12 @@
                         Apakah Anda yakin mau Hapus blog : {{ $item->judul }} ???
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <form action="/dashboard/{{ $item->id }}" method="post">
                             @method('delete')
                             @csrf
                             <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i>&nbsp; Delete</button>
                         </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
